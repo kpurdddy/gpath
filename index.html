@@ -2508,7 +2508,10 @@
     ctx.save();
     ctx.fillStyle='white'; ctx.font='bold 24px Nunito,sans-serif';
     ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.fillText('Pulling over to cry.',W/2,H/2);
+    ctx.fillText('Pulling over to cry.',W/2,H/2-14);
+    ctx.font='16px Nunito,sans-serif';
+    ctx.fillStyle='rgba(255,255,255,0.7)';
+    ctx.fillText('Nigel sits and seethes.',W/2,H/2+16);
     ctx.restore();
   }
 
@@ -2893,23 +2896,23 @@
     if(hourFlash>0) hourFlash=Math.max(0,hourFlash-dt*2);
     if(nigelYellCooldown>0){nigelYellCooldown-=dt;if(nigelYellCooldown<=0)nigelYellPending=false;}
     if(nigelIntroTimer>0){nigelIntroTimer-=dt;if(nigelIntroTimer<=0)showToast('😤 "Right. Let\'s get this over with."',110);}
-    if(celineArrivalPending&&celineArrivalTimer>0){celineArrivalTimer-=dt;if(celineArrivalTimer<=0){celineArrivalPending=false;playCeline();showAnn('👩\u200d⚕️ CÉLINE ON BOARD!','Hi! Sorry I am late — you are doing great!','#B8B2D8',180);}}
+    if(celineArrivalPending&&celineArrivalTimer>0){celineArrivalTimer-=dt;if(celineArrivalTimer<=0){celineArrivalPending=false;playCeline();showAnn('👩\u200d⚕️ CÉLINE ON BOARD!','Hi, welcome to Gentle Path. Let\'s make progress.','#B8B2D8',180);}}
 
     // ── TIMERS ──
     if(phoneTimer>0){phoneTimer-=dt;if(phoneTimer<=0){phoneReversed=false;showToast('✅ Controls back to normal!',60);}}
     if(pudSlide){pudTimer-=dt;lane=pudSlideLane;targetX=LANES[lane];if(pudTimer<=0)pudSlide=false;}
 
     // ── MOVEMENT (spring system for smoothness) ──
-    if(moveCool>0) moveCool-=dt;
+    if(moveCool>0) moveCool--;
     if(!pudSlide&&!pulloverActive){
       const gl=keys.ArrowLeft||keys.a||keys.A;
       const gr=keys.ArrowRight||keys.d||keys.D;
       const ml=phoneReversed?gr:gl;
       const mr=phoneReversed?gl:gr;
-      if(ml&&lane>0&&moveCool<=0){lane--;targetX=LANES[lane];moveCool=0.18;playerVX=0;}
-      if(mr&&lane<2&&moveCool<=0){lane++;targetX=LANES[lane];moveCool=0.18;playerVX=0;}
+      if(ml&&lane>0&&moveCool<=0){lane--;targetX=LANES[lane];moveCool=13;playerVX=0;}
+      if(mr&&lane<2&&moveCool<=0){lane++;targetX=LANES[lane];moveCool=13;playerVX=0;}
     }
-    playerX+=(targetX-playerX)*Math.min(1,12*dt);
+    playerX+=(targetX-playerX)*0.2;
 
     // ── PULLOVER SEQUENCE ──
     if(pulloverActive){
@@ -2948,7 +2951,7 @@
           showToast('😤  ...',30);
           setTimeout(()=>{
             pulloverActive=true; pulloverTimer=4.33; pulloverLane=Math.random()<0.5?0:2;
-            showAnn('Pulling over to cry.','','#7FBCD2',260);
+            ann={text:'',subtext:'',color:'#F5C400',timer:0,max:0};
             nigelYellPending=false;
           },800);
         }
@@ -2987,8 +2990,8 @@
         celineOnBoard=true; nigelOnBoard=false; celineRescue=null; celineRescueActive=false;
         spawnParticles(playerX,H-100,'#B8B2D8');
         playNigel();
-        showAnn("I'm going to the pub.", "😤 Nigel crosses his arms.", '#FF4400', 160);
-        setTimeout(()=>{playCeline();showAnn('👩‍⚕️ CÉLINE ON BOARD!','Hi! Sorry I am late — you are doing great!','#B8B2D8',180);},2200);
+        showAnn("Fine! I'm going to the pub!", "Nigel leaves.", '#FF4400', 160);
+        setTimeout(()=>{playCeline();showAnn('👩‍⚕️ CÉLINE ON BOARD!','Hi, welcome to Gentle Path. Let\'s make progress.','#B8B2D8',180);},2200);
         spawnCollectible();
       } else if(celineRescue.y>H+40){
         celineRescue=null; celineRescueTimer=4.17;
@@ -3083,8 +3086,8 @@
     const dx=e.touches[0].clientX-touchStartX;
     const ml=phoneReversed?dx>20:dx<-20;
     const mr=phoneReversed?dx<-20:dx>20;
-    if(ml&&lane>0&&moveCool<=0){lane--;targetX=LANES[lane];moveCool=0.18;playerVX=0;touchStartX=e.touches[0].clientX;}
-    if(mr&&lane<2&&moveCool<=0){lane++;targetX=LANES[lane];moveCool=0.18;playerVX=0;touchStartX=e.touches[0].clientX;}
+    if(ml&&lane>0&&moveCool<=0){lane--;targetX=LANES[lane];moveCool=13;playerVX=0;touchStartX=e.touches[0].clientX;}
+    if(mr&&lane<2&&moveCool<=0){lane++;targetX=LANES[lane];moveCool=13;playerVX=0;touchStartX=e.touches[0].clientX;}
   },{passive:false});
   canvas.addEventListener('touchend',e=>{e.preventDefault();touchStartX=null;},{passive:false});
   canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect();handleTap((e.clientX-r.left)*(W/r.width),(e.clientY-r.top)*(H/r.height));});
@@ -3114,8 +3117,8 @@
     if(active&&!pudSlide&&!pulloverActive){
       const ml=phoneReversed?tx>W/2:tx<W/2;
       const mr=phoneReversed?tx<W/2:tx>W/2;
-      if(ml&&lane>0&&moveCool<=0){lane--;targetX=LANES[lane];moveCool=0.18;playerVX=0;}
-      if(mr&&lane<2&&moveCool<=0){lane++;targetX=LANES[lane];moveCool=0.18;playerVX=0;}
+      if(ml&&lane>0&&moveCool<=0){lane--;targetX=LANES[lane];moveCool=13;playerVX=0;}
+      if(mr&&lane<2&&moveCool<=0){lane++;targetX=LANES[lane];moveCool=13;playerVX=0;}
     }
   }
 
