@@ -1579,69 +1579,210 @@
 </section>
 
 <!-- ═══════════════ THE CAR ═══════════════ -->
-<section class="section" id="the-car">
+<style>
+  /* --- Styling for the Car Section --- */
+  .section-car {
+    background-color: #FAF7F0; /* Cream Background */
+    padding: 80px 20px;
+    border-radius: 24px;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .car-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .section-label {
+    color: #7B6FB5; /* Lavender */
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    color: #1E1530;
+    margin: 0;
+  }
+
+  /* Floral Divider */
+  .divider-floral {
+    color: #7B6FB5;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    margin: 15px 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.7;
+  }
+
+  .divider-floral::before,
+  .divider-floral::after {
+    content: "";
+    height: 1px;
+    flex-grow: 1;
+    background: linear-gradient(to right, transparent, #7B6FB5, transparent);
+    opacity: 0.3;
+  }
+
+  .car-intro-text {
+    color: #4a4458;
+    font-size: 16px;
+    margin-bottom: 35px;
+    line-height: 1.8;
+  }
+
+  /* Specs Grid */
+  .car-specs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .car-spec {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(123, 111, 181, 0.1);
+    box-shadow: 0 4px 12px rgba(30, 21, 48, 0.03);
+  }
+
+  .car-spec-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .car-spec-label {
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    color: #7B6FB5;
+    margin-bottom: 4px;
+  }
+
+  .car-spec-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #1E1530;
+    line-height: 1.2;
+  }
+
+  .car-spec-sub {
+    font-size: 13px;
+    color: #6b6675;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .ancap-stars {
+    color: #F5C400; /* L-Plate Yellow */
+    letter-spacing: 2px;
+  }
+
+  .manual-note {
+    color: #6b6675;
+    font-size: 14px;
+    margin-top: 30px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* Photo Placeholder */
+  .car-image-placeholder {
+    background: #fff;
+    border: 2px dashed #7B6FB5;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ph-icon { font-size: 40px; margin-bottom: 15px; }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 900px) {
+    .car-inner { grid-template-columns: 1fr; gap: 40px; }
+    .car-specs { grid-template-columns: 1fr; }
+    .car-image-placeholder { order: -1; min-height: 300px; }
+  }
+</style>
+
+<section class="section section-car" id="the-car">
   <div class="car-inner">
     <div>
       <div class="section-label">Safety &amp; Comfort</div>
       <h2 class="section-title">The <em>Car</em></h2>
-      <div class="divider-floral">— 🌿 —</div>
-      <p style="color:var(--mid);font-size:16px;margin-bottom:28px;line-height:1.8;">You deserve to learn in a safe, comfortable, modern vehicle. I made sure of it.</p>
+      <div class="divider-floral">🌿</div>
+      <p class="car-intro-text">You deserve to learn in a safe, comfortable, modern vehicle. I made sure of it.</p>
+      
       <div class="car-specs">
         <div class="car-spec">
           <div class="car-spec-icon">🚗</div>
           <div class="car-spec-label">Vehicle</div>
           <div class="car-spec-value">Toyota Yaris Cross Hybrid</div>
-          <div class="car-spec-sub">December 2025 · Automatic with hybrid drivetrain</div>
+          <div class="car-spec-sub">December 2025 · Automatic</div>
         </div>
+        
         <div class="car-spec">
           <div class="car-spec-icon">⭐</div>
           <div class="car-spec-label">ANCAP Safety Rating</div>
-          <div class="car-spec-value"><span class="ancap-stars">★★★★★</span></div>
-          <div class="car-spec-sub">5-Star ANCAP rated</div>
+          <div class="car-spec-value"><span class="ancap-stars" aria-label="5 stars">★★★★★</span></div>
+          <div class="car-spec-sub">5-Star rated for peace of mind</div>
         </div>
+        
         <div class="car-spec">
           <div class="car-spec-icon">🦶</div>
           <div class="car-spec-label">Dual Controls</div>
           <div class="car-spec-value">Dual-Brake Fitted</div>
           <div class="car-spec-sub">Instructor brake for your safety</div>
         </div>
+        
         <div class="car-spec">
           <div class="car-spec-icon">📹</div>
           <div class="car-spec-label">Dash Cam &amp; Cabin Cam</div>
           <div class="car-spec-value">Front &amp; Interior</div>
-          <div class="car-spec-sub">Road and cabin cameras for your safety and peace of mind</div>
+          <div class="car-spec-sub">For safety and peace of mind</div>
         </div>
+        
         <div class="car-spec">
           <div class="car-spec-icon">🛡️</div>
           <div class="car-spec-label">Toyota Safety Sense</div>
           <div class="car-spec-value">Full Suite</div>
-          <div class="car-spec-sub">Pre-collision braking, lane departure alert, adaptive cruise control, road sign assist</div>
+          <div class="car-spec-sub">Active alerts and assist features</div>
         </div>
+        
         <div class="car-spec">
           <div class="car-spec-icon">📷</div>
           <div class="car-spec-label">Parking &amp; Visibility</div>
-          <div class="car-spec-value">Reversing Camera &amp; Sensors</div>
-          <div class="car-spec-sub">Blind spot monitoring, rear cross traffic alert</div>
-        </div>
-        <div class="car-spec">
-          <div class="car-spec-icon">❄️</div>
-          <div class="car-spec-label">Air Conditioning</div>
-          <div class="car-spec-value">Full Climate Control</div>
-          <div class="car-spec-sub">Comfortable in all SA seasons</div>
-        </div>
-        <div class="car-spec">
-          <div class="car-spec-icon">🪞</div>
-          <div class="car-spec-label">Mirrors</div>
-          <div class="car-spec-value">Extra Instructor Mirror</div>
-          <div class="car-spec-sub">Full visibility for safe supervision</div>
+          <div class="car-spec-value">Camera &amp; Sensors</div>
+          <div class="car-spec-sub">Blind spot monitoring included</div>
         </div>
       </div>
-      <p style="color:var(--muted);font-size:14px;margin-top:20px;line-height:1.7;font-style:italic;">Céline is also skilled with a manual transmission. For advanced learners who have already demonstrated competence on an automatic, manual lessons may be available on request.</p>
+      
+      <p class="manual-note">Céline is also skilled with a manual transmission. For advanced learners who have already demonstrated competence on an automatic, manual lessons may be available on request.</p>
     </div>
+
     <div class="car-image-placeholder">
       <div class="ph-icon">🚗</div>
       <strong>Photo of your car here</strong>
-      <span style="font-weight:400; color:var(--muted); margin-top:4px;">Replace with an actual photo of your vehicle. Show the dual-brake setup and the "Learner Driver" roof sign.</span>
+      <span style="font-weight:400; color:#6b6675; margin-top:10px; font-size: 14px;">
+        Show the dual-brake setup and your branding.
+      </span>
     </div>
   </div>
 </section>
